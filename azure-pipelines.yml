@@ -6,8 +6,6 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
 
 steps:
 - powershell: echo Hello $(name)
@@ -17,9 +15,13 @@ steps:
   failOnStderr: true
   env:
     name: Microsoft
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      Write-Host "Hello World"
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 

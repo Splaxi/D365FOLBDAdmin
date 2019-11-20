@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E843CF12-C82B-4BAE-8A2C-504EC4EC0BCF}") = "D365FOLBDAdmin", "D365FOLBDAdmin\D365FOLBDAdmin.csproj", "{F09154AC-1EAC-46BA-A05C-790B5594CFF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F09154AC-1EAC-46BA-A05C-790B5594CFF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F09154AC-1EAC-46BA-A05C-790B5594CFF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F09154AC-1EAC-46BA-A05C-790B5594CFF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F09154AC-1EAC-46BA-A05C-790B5594CFF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70C5B3B3-8709-4F94-95D5-6233665AD3DE}
+	EndGlobalSection
+EndGlobal

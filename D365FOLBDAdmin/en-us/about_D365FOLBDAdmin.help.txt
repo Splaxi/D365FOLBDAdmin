@@ -1,0 +1,11 @@
+﻿TOPIC
+	about_D365FOLBDAdmin
+	
+SHORT DESCRIPTION
+	Explains how to use the D365FOLBDAdmin powershell module
+	
+LONG DESCRIPTION
+	<Insert Content here>
+
+KEYWORDS
+	D365FOLBDAdmin

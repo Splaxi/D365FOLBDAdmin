@@ -1,27 +1,20 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
-- master
-
-
+﻿pool:
+  name: Hosted VS2017
 steps:
-- powershell: echo Hello $(name)
-  displayName: Say hello
-  name: firstStep
-  workingDirectory: $(build.sourcesDirectory)
-  failOnStderr: true
-  env:
-    name: Microsoft
 - task: PowerShell@2
+  displayName: Prerequisites
   inputs:
-    targetType: 'inline'
-    script: |
-      # Write your PowerShell commands here.
-      
-      Write-Host "Hello World"
+    targetType: filePath
+    filePath: './build/vsts-prerequisites.ps1'
 
-  displayName: 'Run a multi-line script'
+- task: PowerShell@2
+  displayName: Validate
+  inputs:
+    targetType: filePath
+    filePath: './build/vsts-validate.ps1'
 
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results **/TEST-*.xml'
+  inputs:
+    testResultsFormat: NUnit
+  condition: always()

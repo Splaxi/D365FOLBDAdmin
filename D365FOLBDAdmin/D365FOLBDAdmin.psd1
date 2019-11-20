@@ -18,7 +18,7 @@
 	Copyright = 'Copyright (c) 2019 StefanRLand Off and On IT'
 	
 	# Description of the functionality provided by this module
-	Description = 'For Dynamics 365 LBD Administration'
+	Description = 'For Dynamics 365 Finance and Operations Local Business Data (LBD) Administration'
 	
 	# Minimum version of the Windows PowerShell engine required by this module
 	PowerShellVersion = '5.0'
@@ -63,16 +63,18 @@
 		PSData = @{
 			
 			# Tags applied to this module. These help with module discovery in online galleries.
-			# Tags = @('D365')
+			 Tags = @('D365','D365F&O','LBD','D365LBD')
 			
 			# A URL to the license for this module.
-			# LicenseUri = ''
+			 LicenseUri = 'https://github.com/stefanland/D365FOLBDAdmin/blob/master/LICENSE'
 			
 			# A URL to the main website for this project.
-			# ProjectUri = ''
+			 ProjectUri = 'https://github.com/stefanland/D365FOLBDAdmin'
 			
 			# A URL to an icon representing this module.
-			# IconUri = ''
+			 IconUri = 'https://offandonit.com/favicon.png'
+
+             #HelpInfoUri = 'https://offandonit.com/tag/d365folbdadmin'
 			
 			# ReleaseNotes of this module
 			# ReleaseNotes = ''

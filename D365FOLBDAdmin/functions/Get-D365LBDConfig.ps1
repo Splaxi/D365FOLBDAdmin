@@ -29,17 +29,15 @@
 
     if (($null -eq $ComputerName) -or ($env:COMPUTERNAME -eq $ComputerName) -or ($ComputerName -eq "localhost") -or (!$ComputerName)) {
         Write-PSFMessage -Level Warning -Message "Looking for the clusterconfig on the localmachine as no computername provided"
-        if ($(Test-Path "C:\ProgramData\SF\clusterManifest.xml") -eq $False)
-        {
-        Write-PSFMessage -Level Critical -Message "Error: This is not an Local Business Data server. Stopping" -ErrorAction Stop -ErrorRecord $_ -OverrideExceptionMessage
+        if ($(Test-Path "C:\ProgramData\SF\clusterManifest.xml") -eq $False) {
+            Write-PSFMessage -Level Critical -Message "Error: This is not an Local Business Data server. Stopping" -ErrorAction Stop -ErrorRecord $_ -OverrideExceptionMessage
         }
         $ClusterManifestXMLFile = get-childitem "C:\ProgramData\SF\clusterManifest.xml" 
     }
     else {
         Write-PSFMessage -Level Verbose "Connecting to admin share on $ComputerName for cluster config"
-         if ($(Test-Path "\\$ComputerName\C$\ProgramData\SF\clusterManifest.xml") -eq $False)
-        {
-        Write-PSFMessage -Level Critical -Message "Error: This is not an Local Business Data server. Can't find Cluster Manifest. Stopping" -ErrorAction Stop -ErrorRecord $_ -OverrideExceptionMessage
+        if ($(Test-Path "\\$ComputerName\C$\ProgramData\SF\clusterManifest.xml") -eq $False) {
+            Write-PSFMessage -Level Critical -Message "Error: This is not an Local Business Data server. Can't find Cluster Manifest. Stopping" -ErrorAction Stop -ErrorRecord $_ -OverrideExceptionMessage
         }
         $ClusterManifestXMLFile = get-childitem "\\$ComputerName\C$\ProgramData\SF\clusterManifest.xml"
     }
@@ -48,7 +46,7 @@
     }
             
     if ($(test-path $ClusterManifestXMLFile) -eq $false) {
-    Write-PSFMessage -Level Critical "Error: Cluster Manifest not found. Are you sure you are on or pointing to a LBD Server" 
+        Write-PSFMessage -Level Critical "Error: Cluster Manifest not found. Are you sure you are on or pointing to a LBD Server" 
     }
     [xml]$xml = get-content $ClusterManifestXMLFile
     
@@ -65,12 +63,12 @@
     }
     foreach ($OrchestratorServerName in $OrchestratorServerNames) {
         if (!$OrchServiceLocalAgentConfigXML) {
-        Write-PSFMessage -Level Verbose "Verbose: Connecting to $OrchestratorServerName for Orchestrator config" 
-                     $OrchServiceLocalAgentConfigXML = get-childitem "\\$OrchestratorServerName\C$\ProgramData\SF\*\Fabric\work\Applications\LocalAgentType_App*\OrchestrationServicePkg.Package.Current.xml"
+            Write-PSFMessage -Level Verbose "Verbose: Connecting to $OrchestratorServerName for Orchestrator config" 
+            $OrchServiceLocalAgentConfigXML = get-childitem "\\$OrchestratorServerName\C$\ProgramData\SF\*\Fabric\work\Applications\LocalAgentType_App*\OrchestrationServicePkg.Package.Current.xml"
         }
     }
     if (!$OrchServiceLocalAgentConfigXML) {
-    Write-PSFMessage -Level Critical "Error: Can't find any Orchestrator Node Local Agent file" -ErrorRecord
+        Write-PSFMessage -Level Critical "Error: Can't find any Orchestrator Node Local Agent file" -ErrorRecord
         
     }
     
@@ -109,11 +107,10 @@
     }
     $AOSConfigServerName = $AOSServerNames | Select-Object -First 1
     Write-PSFMessage -Level Verbose "Verbose: Reaching out to $AOSConfigServerName for AX config"
-    #Write-Verbose "Reaching out to $AOSConfigServerName for AX config"
 
     $SFConfig = get-childitem "\\$AOSConfigServerName\C$\ProgramData\SF\*\Fabric\work\Applications\AXSFType_App*\AXSF.Package.Current.xml"
     if (!$SFConfig) {
-    Write-PSFMessage -Level Verbose "Verbose: Cant find AOS SF. App may not be installed"
+        Write-PSFMessage -Level Verbose "Verbose: Cant find AOS SF. App may not be installed"
     }
     else {
         [xml]$xml = get-content $SFConfig 
@@ -141,8 +138,7 @@
         $LCSEnvironmentName = $($jsonconfig | ConvertFrom-Json).environmentName
     }
     else {
-     Write-PSFMessage -Level Warning "WARNING: Can't Find Config in WP folder cant get Environment ID or TenantID"
-        #Write-Verbose "Can't Find Config in WP folder cant get Environment ID or TenantID"
+        Write-PSFMessage -Level Warning "WARNING: Can't Find Config in WP folder cant get Environment ID or TenantID"
         $LCSEnvironmentId = ""
         $TenantID = ""
         $LCSEnvironmentName = ""
@@ -169,8 +165,6 @@
         "LCSEnvironmentName"      = $LCSEnvironmentName
         "TenantID"                = $TenantID
     }
-    
     $Output = New-Object PSObject -Property $Properties
     return $Output
 }
-

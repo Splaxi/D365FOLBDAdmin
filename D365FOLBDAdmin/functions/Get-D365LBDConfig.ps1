@@ -23,11 +23,17 @@
             ValueFromPipelineByPropertyName = $True,
             Mandatory = $false,
             HelpMessage = 'D365FO Local Business Data Server Name')]
-        [string]$ComputerName
+        [PSFComputer]$ComputerName = "$env:COMPUTERNAME"
     )
     ##Gather Infromation from the Dynamics 365 Orchestrator Server Config
+    BEGIN
+    {
+    }
+    PROCESS
+    {
+        
 
-    if (($null -eq $ComputerName) -or ($env:COMPUTERNAME -eq $ComputerName) -or ($ComputerName -eq "localhost") -or (!$ComputerName)) {
+        if ($ComputerName.IsLocalhost){
         Write-PSFMessage -Level Warning -Message "Looking for the clusterconfig on the localmachine as no computername provided"
         if ($(Test-Path "C:\ProgramData\SF\clusterManifest.xml") -eq $False) {
             Write-PSFMessage -Level Critical -Message "Error: This is not an Local Business Data server. Stopping" -ErrorAction Stop -ErrorRecord $_ -OverrideExceptionMessage
@@ -68,7 +74,7 @@
         }
     }
     if (!$OrchServiceLocalAgentConfigXML) {
-        Write-PSFMessage -Level Critical "Error: Can't find any Orchestrator Node Local Agent file" -ErrorRecord
+        Write-PSFMessage -Level Critical "Error: Can't find any Orchestrator Node Local Agent file" 
         
     }
     
@@ -164,7 +170,12 @@
         "LCSEnvironmentID"        = $LCSEnvironmentId
         "LCSEnvironmentName"      = $LCSEnvironmentName
         "TenantID"                = $TenantID
+        "ComputerName"            = $env:COMPUTERNAME
     }
-    $Output = New-Object PSObject -Property $Properties
-    return $Output
+    ##Sends Custom Object to Pipeline
+    [PSCustomObject]$Properties
+    }
+    END
+    {
+    }
 }
